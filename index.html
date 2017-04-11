@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title>register</title>
+		<!--<link rel="stylesheet" href="css/layer.css" />-->
+		<link rel="stylesheet" href="css/public.css" />
+		<link rel="stylesheet" href="css/userlogin.css" />
+	</head>
+
+	<body>
+		<div class="g-main">
+			<div class="g-sign-in">
+				<!--头部-->
+				<div class="m-header">
+					<div class="u-close">
+						<i class="i-close-icon sprites-img"></i>
+						<a href="index.html"></a>
+					</div>
+					<div class="u-sign-text">Create Account</div>
+				</div>
+				<!--中间注册-->
+				<div class="m-user-inner">
+					<!--账户-->
+					<div class="u-account-box">
+						<input type="email" name="email" id="email" placeholder="Enter your Email " value="">
+						<div class="u-btn" id="u-btn1">
+							<i class="icon1 sprites-img"></i>
+						</div>
+					</div>
+					<!--密码-->
+					<div class="u-pass-box">
+						<input type="password" id="pass1" />
+						<div class="u-btn" id="u-btn2">
+							<i class="icon2 sprites-img"></i>
+						</div>
+					</div>
+					<div class="u-pass-box">
+						<input type="password" id="pass2" />
+						<div class="u-btn" id="u-btn3">
+							<i class="icon2 sprites-img"></i>
+						</div>
+					</div>
+
+					<!--注册按钮-->
+					<div class="u-button-box">
+						<a href="javascript:;" id="submit">Create Account</a>
+					</div>
+				</div>
+				<!--注册facebook-->
+				<div class="m-facrbook">
+					<div class="u-facrbook-icon"></div>
+					<a href="javascript:;">Sign Up with Facebook
+					</a>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="js/jquery-1.11.3.min.js"></script>
+<!--<script src="js/layer.js"></script>-->
+<script type="text/javascript">
+	$(function() {
+		$('#email').click(function(e) {
+			$(this).next('#u-btn1').find('.icon1').show();
+			//      		return false;
+			e.stopPropagation();
+		})
+		$('#u-btn1').click(function(e) {
+			$(this).prev('input').val('').focus();
+			//      	 	return false
+			e.stopPropagation();
+		})
+		$(document).click(function() {
+			$('#u-btn1').find('.icon1').hide()
+		})
+
+		$('#u-btn2').click(function() {
+			if($('#pass1').attr('type') == 'password') {
+				$(this).find('i').removeClass('icon2').addClass('active');
+				$('#pass1').attr('type', 'text');
+			} else {
+				$(this).find('i').removeClass('active').addClass('icon2')
+				$('#pass1').attr('type', 'password');
+			}
+		})
+
+		$('#u-btn3').click(function() {
+			if($('#pass2').attr('type') == 'password') {
+				$(this).find('i').removeClass('icon2').addClass('active');
+				$('#pass2').attr('type', 'text');
+			} else {
+				$(this).find('i').removeClass('active').addClass('icon2');
+				$('#pass2').attr('type', 'password');
+			}
+		})
+		//验证
+		$('#submit').click(function() {
+			var email = $('#email').val();
+			if(!email) {
+				alert('输入有误');
+				$('#email').focus();
+				return;
+			} else if(!/^[0-9a-zA-Z._-]+@(([0-9a-zA-Z_-]+)[-]?([0-9a-zA-Z]+)[.])+[a-z]{2,10}$/.test($.trim(email))) {
+				//test() 方法用于检测一个字符串是否匹配某个模式.如果字符串中有匹配的值返回 true ，否则返回 false。
+				//trim()去掉字符串首尾空格。 
+				alert('邮箱输入格式不正确');
+				$('#email').focus();
+				return;
+			}
+			var pass1 = $('#pass1').val();
+			if(!pass1) {
+				alert('密码不正确')
+				$('#pass1').focus();
+				return;
+			} else if(!/^.{6,20}$/i.test(pass1)) {
+				alert('密码不正确');
+				$('#pwd').focus();
+				return;
+			}
+			var pass2 = $('#pass2').val();
+			if(pass2 != pass1) {
+				alert('密码不一致');
+				$('#pass2').focus();
+				return;
+			}
+			$('#form').submit();
+		})
+	});
+</script>
